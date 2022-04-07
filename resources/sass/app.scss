@@ -1,0 +1,22 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+// Variables
+@import 'variables';
+
+// FontAwesome
+$fa-font-path:"../webfonts";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import 'custom';
+
+
+// AdminLTE
+@import '~admin-lte/dist/css/adminlte.css';
+
+
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
