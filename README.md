@@ -28,7 +28,7 @@ SweetHome is a PHP based on Laravel that helps real estate agent's properties mo
  1. `git clone https://github.com/pedrigalLJ/sweethome.git`
  2. `cd sweethome`
  3. `composer install`
- 4. `cp .env.example .env`
+ 4. `copy .env.example .env`
  5. `php artisan key:generate`
  6. `php artisan migrate`
  7. `php artisan db:seed`
