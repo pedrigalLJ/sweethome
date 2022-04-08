@@ -126,23 +126,6 @@ class SeekerController extends Controller
             
         ];
 
-        // $agentRatings = [
-        //     'chart_title' => 'Star Ratings',
-        //     'chart_type' => 'bar',
-        //     'report_type' => 'group_by_relationship',
-        //     'model' => 'App\Models\Rating',
-        
-        //     'relationship_name' => 'agent', 
-        //     'group_by_field' => 'username',
-        
-        //     'aggregate_function' => 'avg',
-        //     'aggregate_field' => 'star_rate',
-
-        //     'chart_color' => '249, 166, 2',
-        //     'top_results' => 10
-            
-            
-        // ];
         $agentRatingsChart = new LaravelChart($agentRatings);
     
         return view('dashboards.seeker.all-agents', compact('search', 'agents', 'msg', 'agentRatingsChart'));
