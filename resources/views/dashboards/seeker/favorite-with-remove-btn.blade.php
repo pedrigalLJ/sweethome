@@ -27,24 +27,21 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form method="POST" action="{{ route('agent.property-store-photos') }}" enctype="multipart/form-data" >
-                                        @csrf
-                                        <div class="modal-body">
-                                            @forelse($images as $image)
-                                                @foreach (json_decode($image->url) as $picture)
-                                                    <img class="img-fluid shadow-lg mr-3 hover-photo"  src="{{ asset('storage/properties/'.$picture) }}" style="height:200px; width:200px"/>
-                                                @endforeach
-                                        
-                                            @empty
-                                                <div class="container text-center mt-5">
-                                                    <p class="text-muted text-md"> Nothing to show. </p>
-                                                </div> 
-                                            @endforelse
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </form>
+                                    <div class="modal-body">
+                                        @forelse($images as $image)
+                                            @foreach (json_decode($image->url) as $picture)
+                                                <img class="img-fluid shadow-lg mr-3 hover-photo"  src="{{ asset('storage/properties/'.$picture) }}" style="height:200px; width:200px"/>
+                                            @endforeach
+                                    
+                                        @empty
+                                            <div class="container text-center mt-5">
+                                                <p class="text-muted text-md"> Nothing to show. </p>
+                                            </div> 
+                                        @endforelse
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -143,6 +140,52 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                                <label for="date" class="col-form-label">Availability (Days & Time(24H Format))</label>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                       
+                                                        @foreach(json_decode($favorite->property->avail_days) as $days)
+                                                            <span class="bg-danger h6">&nbsp;{{ $days }}&nbsp;</span>
+                                                        @endforeach
+                                                        <input 
+                                                            type="text" 
+                                                            class=" bg-success text-capitalize form-control @error('day') is-invalid @enderror" 
+                                                            id="day" 
+                                                            name="day"
+                                                            readonly
+                                                            value="{{ $favorite->property->avail_days }}"
+                                                            hidden>
+                                                        @error('day')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>
+                                                                    {{ $message }}
+                                                                </strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        @foreach(json_decode($favorite->property->avail_times) as $times)
+                                                            <span class="bg-danger h6">&nbsp;{{ $times }}&nbsp;</span>
+                                                        @endforeach
+                                                        <input 
+                                                            type="text" 
+                                                            class=" bg-success form-control @error('avail_times') is-invalid @enderror" 
+                                                            id="avail_times" 
+                                                            name="avail_times"
+                                                            readonly
+                                                            value="{{ $favorite->property->avail_times }}"
+                                                            hidden>
+                                                            @error('avail_times')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>
+                                                                        {{ $message }}
+                                                                    </strong>
+                                                                </span>
+                                                            @enderror
+                                                    </div>
+                                                </div>
                                                 <label for="date" class="col-form-label">Date</label>
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
@@ -161,8 +204,26 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                                <label for="input_time" class="col-form-label">Time</label>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <input 
+                                                            type="text" 
+                                                            class="form-control @error('input_time') is-invalid @enderror" 
+                                                            id="input_time" 
+                                                            name="input_time" 
+                                                            required>
+                                                        @error('input_time')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>
+                                                                    {{ $message }}
+                                                                </strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                                 <br>
-                                                <div class="modal-footer">
+                                                <div class="modal-footer bg-white">
                                                     <button type="submit" class="btn btn-success">{{ __('Request') }}</button>
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 </div>
@@ -193,11 +254,6 @@
                         <p class="text-muted mt-2"><i class="fas fa-map-marker-alt text-danger"></i>&nbsp;{{ $favorite->property->user->city.', '.$favorite->property->user->province }}
                         </p>
                         <p class="card-text"><h6 class="text-secondary">About</h6><hr class="mt-n1">{{ $favorite->property->user->about }}</p>
-                        
-                        
-                        {{-- <hr> --}}
-                        {{-- <p class="card-text"><h6 class="text-secondary">Total Listings</h6><hr class="mt-n1"><h4 class="text-danger font-weight-bold">{{ $favorite->property->count() }}</h4></p> --}}
-                        
                         <hr>
                         <div class="buttons">
                             <a href="{{ route('seeker.agent-profile', $favorite->property->user->id) }}" class="btn btn-danger"><i class="fas fa-user-tie"></i> Visit Profile</a>

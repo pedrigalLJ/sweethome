@@ -26,24 +26,21 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form method="POST" action="{{ route('agent.property-store-photos') }}" enctype="multipart/form-data" >
-                                        @csrf
-                                        <div class="modal-body">
-                                            @forelse($images as $image)
-                                                @foreach (json_decode($image->url) as $picture)
-                                                    <img class="img-fluid shadow-lg mr-3 hover-photo"  src="{{ asset('storage/properties/'.$picture) }}" style="height:200px; width:200px"/>
-                                                @endforeach
-                                        
-                                            @empty
-                                                <div class="container text-center mt-5">
-                                                    <p class="text-muted text-md"> Nothing to show. </p>
-                                                </div> 
-                                            @endforelse
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </form>
+                                    <div class="modal-body">
+                                        @forelse($images as $image)
+                                            @foreach (json_decode($image->url) as $picture)
+                                                <img class="img-fluid shadow-lg mr-3 hover-photo"  src="{{ asset('storage/properties/'.$picture) }}" style="height:200px; width:200px"/>
+                                            @endforeach
+                                    
+                                        @empty
+                                            <div class="container text-center mt-5">
+                                                <p class="text-muted text-md"> Nothing to show. </p>
+                                            </div> 
+                                        @endforelse
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -255,9 +252,6 @@
                         </p>
                         
                         <p class="card-text"><h6 class="text-secondary">About</h6><hr class="mt-n1">{{ $listings->user->about }}</p>
-                        {{-- <hr> --}}
-                        {{-- <p class="card-text"><h6 class="text-secondary">Total Listings</h6><hr class="mt-n1"><h4 class="text-danger font-weight-bold">{{ $listings->count() }}</h4></p> --}}
-                        
                         <hr>
                         <div class="buttons">
                             <a href="{{ route('seeker.agent-profile', $listings->user->id) }}" class="btn btn-danger"><i class="fas fa-address-card"></i> Visit Profile</a>

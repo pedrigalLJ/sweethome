@@ -84,7 +84,7 @@
                                     <td>
                                         {{ date('H:i', strtotime($appointment->time)) }}
                                     </td>
-                                    <td>{{ $appointment->user->username }}</td>
+                                    <td>{{ $appointment->agent->username }}</td>
                                     <td>{{ $appointment->property->title }}</td>
                                     
                                     <td class="text-sm">
@@ -125,7 +125,7 @@
                                     <td>
                                         {{ date('H:i', strtotime($appointment->time)) }}
                                     </td>
-                                    <td>{{ $appointment->user->username }}</td>
+                                    <td>{{ $appointment->agent->username }}</td>
                                     <td>{{ $appointment->property->title }}</td>
                                     
                                     <td class="text-sm">
@@ -163,7 +163,7 @@
                                     <td>
                                         {{ date('H:i', strtotime($appointment->time)) }}
                                     </td>
-                                    <td>{{ $appointment->user->username }}</td>
+                                    <td>{{ $appointment->agent->username }}</td>
                                     <td>{{ $appointment->property->title }}</td>
                                     <td><a href="{{ route('seeker.view-property', $appointment->property->id) }}" class="text-success"><i class="fas fa-calendar-day"></i> Resched</a></td>
                                 </tr>
@@ -197,7 +197,7 @@
                                     <td>
                                         {{ date('H:i', strtotime($appointment->time)) }}
                                     </td>
-                                    <td>{{ $appointment->user->username }}</td>
+                                    <td>{{ $appointment->agent->username }}</td>
                                     <td>{{ $appointment->property->title }}</td>
                                     @if ( $appointment->status  == 'Cancelled' )
                                         <td class="text-danger font-weight-bold">{{ $appointment->status }}</td>

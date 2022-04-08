@@ -28,7 +28,7 @@ class FavoritePropertyController extends Controller
 
     public function viewFavorites()
     {
-        $favorites = FavoriteProperty::all();
+        $favorites = FavoriteProperty::where('user_id', Auth::id())->get();
         $msg = Message::all()
             ->where('seen', 0)
             ->where('from_id', '!=', Auth::id())
