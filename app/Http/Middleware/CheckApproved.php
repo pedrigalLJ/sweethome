@@ -25,7 +25,7 @@ class CheckApproved
         if ($request->user()->status == 2) {
             auth()->logout();
 
-            return redirect()->route('login')->with('message', 'Your account needs an administrator approval in order to log in. Please check back later.');
+            return redirect()->route('login')->with('message', 'Your account needs an administrator approval in order to log in. An email will sent after.');
 
         }
         return $next($request);
