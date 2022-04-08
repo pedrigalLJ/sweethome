@@ -348,6 +348,8 @@
                                     <option value="" disabled selected>Select...</option>
                                     <option value="1" {{ $listings->status == '1' ? 'selected' : '' }}>Available</option>
                                     <option value="0" {{ $listings->status == '0' ? 'selected' : '' }}>Not Available</option>
+                                    <option value="2" {{ $listings->status == '2' ? 'selected' : '' }}>Sold</option>
+                                    <option value="3" {{ $listings->status == '3' ? 'selected' : '' }}>Rented</option>
                                 </select>
                                 @error('status')
                                     <span 

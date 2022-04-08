@@ -106,8 +106,7 @@ class SeekerController extends Controller
 
         
         $agentRatings = [
-            'name' => 'Agent Total Sales',
-            'chart_title' => 'Total Sales ₱',
+            'chart_title' => 'Total Sales(₱)',
             'chart_type' => 'bar',
             'report_type' => 'group_by_relationship',
             'model' => 'App\Models\Property',
@@ -115,7 +114,7 @@ class SeekerController extends Controller
             'relationship_name' => 'user', 
             'group_by_field' => 'username',
             'group_by_period' => 'month',
-            'where_raw' => 'status = 0 AND type = "sale"',
+            'where_raw' => 'status = 2 AND type = "sale"',
         
             'aggregate_function' => 'sum',
             'aggregate_field' => 'price',
