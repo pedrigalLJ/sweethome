@@ -47,6 +47,8 @@ SweetHome is a PHP based on Laravel that helps real estate agent's properties mo
  > MAIL_PASSWORD=*your password of gmail address
  > 
  > MAIL_ENCRYPTION=tsl *method mail ecryption (tls | ssl)
+ - the controller in App/Http/Controllers/AdminController.php, App/Http/Controllers/AgentAppointmentController.php, App/Http/Controllers/SeekerAppointmentController.php
+     `Mail::to('*Your Email')->send(new SendMail($data));`
  - pusher credentials *for the message feature
  > PUSHER_APP_ID=
  > 
