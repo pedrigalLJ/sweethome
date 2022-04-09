@@ -150,9 +150,6 @@ class AgentController extends Controller
         return view('dashboards.agent.rate-and-comments', compact('msg', 'ratings', 'average_of_ratings'));
     }
 
-    public function subscribe()
-    {
-        return view('subscribe');
-    }
+    
   
 }
