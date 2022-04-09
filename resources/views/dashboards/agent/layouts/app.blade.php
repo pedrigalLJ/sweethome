@@ -28,7 +28,7 @@
 				</ul>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item">
-						<a class="nav-link text-danger" href="/subscribe">{{ auth()->user()->free_trial_days_left }} Days of Free Trial left. Click to Subscribe.</a></strong>
+						<a class="nav-link text-danger" href="#" data-toggle="modal" data-target="#exampleModal">{{ auth()->user()->free_trial_days_left }} Days of Free Trial left. Click to Subscribe.</a></strong>
 					</li>
 					<li class="nav-item dropdown">
 					  <a class="nav-link" href="{{ route('messages') }}">
@@ -155,6 +155,25 @@
 				All Right Reserved<small> 2021</small>
 			</footer>
 		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Subscription Payment</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				</div>
+				<div class="modal-body">
+					<!-- Set up a container element for the button -->
+						<div id="paypal-button-container"></div>
+					</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+			</div>
+		</div>
 		@if (auth()->check() && auth()->user()->free_trial_days_left < 0)
 			<div class="modal" tabindex="-1" role="dialog" style="display: block">
 				<div class="modal-dialog" role="document">
@@ -185,7 +204,34 @@
 				</div>
 			</div>
 		@endif
-		
+		<script src="https://www.paypal.com/sdk/js?client-id=AdWQEehJ2UD4lhwpsunAC4Gdh_8_g9eFnEzYHNHSj93L0tI3qKUaHzXage3KkQvu2_89QD2KwaGiB7wG&currency=USD"></script>
+		<script>
+			paypal.Buttons({
+			  // Sets up the transaction when a payment button is clicked
+			  createOrder: (data, actions) => {
+				return actions.order.create({
+				  purchase_units: [{
+					amount: {
+					  value: '1.00' // Can also reference a variable or function
+					}
+				  }]
+				});
+			  },
+			  // Finalize the transaction after payer approval
+			  onApprove: (data, actions) => {
+				return actions.order.capture().then(function(orderData) {
+				  // Successful capture! For dev/demo purposes:
+				  console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+				  const transaction = orderData.purchase_units[0].payments.captures[0];
+				//   alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+				  // When ready to go live, remove the alert and show a success message within this page. For example:
+				  const element = document.getElementById('paypal-button-container');
+				  element.innerHTML = '<h3>Thank you for your payment!</h3>';
+				  // Or go to another URL:  actions.redirect('thank_you.html');
+				});
+			  }
+			}).render('#paypal-button-container');
+		  </script>
 		@yield('javascripts')
 	</body>
 </html>
