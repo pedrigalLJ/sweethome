@@ -11,6 +11,7 @@ use App\Http\Controllers\Agent\AgentAppointmentController;
 use App\Http\Controllers\Seeker\SeekerAppointmentController;
 use App\Http\Controllers\Agent\PropertyMorePhotosController;
 use App\Http\Controllers\Rating\RatingController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 
@@ -85,7 +86,7 @@ Route::middleware(['auth', 'verified'])->group(function ()
         Route::post('appointment-approve', [AgentAppointmentController::class, 'approve'])->name('appointment-approve');
         Route::post('appointment-decline', [AgentAppointmentController::class, 'decline'])->name('appointment-decline');
 
-
+        Route::get('subscribe', [AgentController::class, 'subscribe'])->name('subscribe');
     });
 });
 
