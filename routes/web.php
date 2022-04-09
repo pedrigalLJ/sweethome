@@ -11,6 +11,7 @@ use App\Http\Controllers\Agent\AgentAppointmentController;
 use App\Http\Controllers\Seeker\SeekerAppointmentController;
 use App\Http\Controllers\Agent\PropertyMorePhotosController;
 use App\Http\Controllers\Rating\RatingController;
+use Illuminate\Support\Facades\Auth; 
 
 /*
 
