@@ -118,7 +118,7 @@
                                 </div>
                             @empty
                                 <div class="container text-center mt-5">
-                                    <p class="text-muted text-md"> No Record. </p>
+                                    <p class="text-muted text-md"> No Record/s. </p>
                                 </div> 
                             @endforelse
                         </table>
@@ -231,7 +231,7 @@
                                 </div>
                             @empty
                                 <div class="container text-center mt-5">
-                                    <p class="text-muted text-md"> No Record. </p>
+                                    <p class="text-muted text-md"> No Record/s. </p>
                                 </div> 
                             @endforelse
                         </table>

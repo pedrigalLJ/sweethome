@@ -32,9 +32,9 @@
 								<span class="dropdown-header">{{ auth()->user()->unreadNotifications->count() }} Notification/s</span>
 								<div class="dropdown-divider"></div>
 								<div class="dropdown-item">
-									<em class="dropdown-item-title text-warning">
+									<strong class="dropdown-item-title text-danger">
 										{{ $notification->data['username'] }}
-									</em>
+									</strong>
 									<small class="text-sm">has just registered.</small>
 									<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>{{ $notification->created_at }}</p>
 								</div>
@@ -43,8 +43,8 @@
 							</div>
 						@empty
 							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-								<div class="dropdown-item">
-									There are no new notifications
+								<div class="dropdown-item text-secondary">
+									There are no new notification/s.
 								</div>
 							</div>
 						@endforelse
@@ -102,21 +102,6 @@
 									
 								</ul>
 							</li>
-							{{-- <li class="nav-item">
-								<a href="#" class="nav-link {{ (request()->is('admin/plans')) ? 'active' : '' }} ">
-									<i class="nav-icon fa fa-donate"></i>
-									<p class="ml-n2">Subscriptions</p>
-									<i class="right fas fa-angle-left"></i>
-								</a>
-								<ul class="nav nav-treeview text-sm ml-2">
-									<li class="nav-item">
-										<a href="{{ route('admin.plans.index') }}" class="nav-link {{ (request()->is('admin/plans')) ? 'active' : '' }} ">
-											<i class="fas fa-clipboard-list nav-icon text-sm"></i>
-											<p class="ml-n2">Plans</p>
-										</a>
-									</li>
-								</ul>
-							</li> --}}
 							<li class="nav-item">
 								<a href="{{ route('admin.logout') }}" class="nav-link" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="nav-icon fas fa-sign-out-alt"></i><p>Logout</p></a>
 								<form action="{{ route('admin.logout') }}" id="logout-form" method="post">@csrf</form>
@@ -139,8 +124,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	
 		@yield('js')
   </body>
 </html>

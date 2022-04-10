@@ -229,19 +229,4 @@ class AdminController extends Controller
 
         return response()->noContent();
     }
-
-    // public function subscribers()
-    // {
-       
-    //     // $search = $request->search;
-    //     // $payments = Payment::where('stripe_id', '!=', null)
-    //     //     ->when($search, function ($query, $search) {
-    //     //         return $query->where('name', 'LIKE', '%'. $search .'%');
-    //     //     })
-    //     //     ->orderBy("created_at", "desc")
-    //     //     ->paginate(3);
-    //     // $payments = Payment::all();
-    //     $notifications = auth()->user()->unreadNotifications;
-    //     return view('dashboards.admin.plans.index', compact('notifications'));
-    // }
 }
