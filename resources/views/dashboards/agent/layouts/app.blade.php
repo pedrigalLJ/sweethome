@@ -161,13 +161,13 @@
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
 					  <div class="modal-header">
-						<h5 class="modal-title text-danger" id="subscribeLabel">Available Soon!</h5>
+						<h5 class="modal-title text-danger" id="subscribeLabel">Subscribe</h5>
 					  </div>
-					  <div class="modal-body bg-danger">
-						Thank you for trying our website. <br> Subscription will be available soon.
+					  <div class="modal-body">
+						<div id="paypal-button-container"></div>
 					  </div>
 					  <div class="modal-footer">
-						  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Okay</button>
+						  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Close</button>
 					  </div>
 					</div>
 				  </div>
@@ -201,13 +201,13 @@
 										<div class="modal-dialog modal-lg">
 										  <div class="modal-content">
 											<div class="modal-header">
-											  <h5 class="modal-title text-danger" id="subscribeLabel">Available Soon!</h5>
+											  <h5 class="modal-title text-danger" id="subscribeLabel">Subscribe</h5>
 											</div>
-											<div class="modal-body bg-danger">
-											  Thank you for trying our website. <br> Subscription will be available soon.
+											<div class="modal-body">
+												<div id="paypal-button-container"></div>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Okay</button>
+												<button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Close</button>
 											</div>
 										  </div>
 										</div>
@@ -219,6 +219,31 @@
 				</div>
 			</div>
 		@endif
+		<script src="https://www.paypal.com/sdk/js?client-id=AdWQEehJ2UD4lhwpsunAC4Gdh_8_g9eFnEzYHNHSj93L0tI3qKUaHzXage3KkQvu2_89QD2KwaGiB7wG&currency=USD"></script>
+		<script>
+			paypal.Buttons({
+			  // Sets up the transaction when a payment button is clicked
+			  createOrder: (data, actions) => {
+				return actions.order.create({
+				  purchase_units: [{
+					amount: {
+					  value: '1.00'
+					}
+				  }]
+				});
+			  },
+			  // Finalize the transaction after payer approval
+			  onApprove: (data, actions) => {
+				return actions.order.capture().then(function(orderData) {
+				  // Successful capture! For dev/demo purposes:
+				  console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+				  const transaction = orderData.purchase_units[0].payments.captures[0];
+				  const element = document.getElementById('paypal-button-container');
+				  element.innerHTML = '<h3>Already Subscribed. <br>Thank you for your payment!</h3>';
+				});
+			  }
+			}).render('#paypal-button-container');
+		  </script>
 		@yield('javascripts')
 	</body>
 </html>
