@@ -156,23 +156,6 @@
 				All Right Reserved<small> 2021</small>
 			</footer>
 		</div>
-		<div class="col-md-6 offset-md-3 text-center">
-			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-					  <div class="modal-header">
-						<h5 class="modal-title text-danger" id="subscribeLabel">Subscribe</h5>
-					  </div>
-					  <div class="modal-body">
-						<div id="paypal-button-container"></div>
-					  </div>
-					  <div class="modal-footer">
-						  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Close</button>
-					  </div>
-					</div>
-				  </div>
-			</div>
-		</div>
 		
 		@if (auth()->check() && auth()->user()->free_trial_days_left < 0)
 			<div class="modal" tabindex="-1" role="dialog" style="display: block">
@@ -219,6 +202,23 @@
 				</div>
 			</div>
 		@endif
+		<div class="col-md-6 offset-md-3 text-center">
+			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+					  <div class="modal-header">
+						<h5 class="modal-title text-danger" id="subscribeLabel">Subscribe</h5>
+					  </div>
+					  <div class="modal-body">
+						<div id="paypal-button-container"></div>
+					  </div>
+					  <div class="modal-footer">
+						  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+					  </div>
+					</div>
+				  </div>
+			</div>
+		</div>
 		<script src="https://www.paypal.com/sdk/js?client-id=AdWQEehJ2UD4lhwpsunAC4Gdh_8_g9eFnEzYHNHSj93L0tI3qKUaHzXage3KkQvu2_89QD2KwaGiB7wG&currency=USD"></script>
 		<script>
 			paypal.Buttons({
