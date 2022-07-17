@@ -15,7 +15,6 @@
                             All Properties
                         </h2>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -30,23 +29,21 @@
                         </h3>
         
                         <div class="card-tools">
-                            {{-- <div class="input-group input-group-sm"> --}}
-                               <form action="{{ route('agent.properties.index') }}" method="GET">
-                                @csrf
-                                    <div class="input-group is-invalid">
-                                        <div class="custom-file">
-                                            <input type="text" name="search" class="form-control float-right" value="{{ request()->input('search') }}" placeholder="Search">
-                                        </div>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
-                                        </div>
+                            <form action="{{ route('agent.properties.index') }}" method="GET">
+                            @csrf
+                                <div class="input-group is-invalid">
+                                    <div class="custom-file">
+                                        <input type="text" name="search" class="form-control float-right" value="{{ request()->input('search') }}" placeholder="Search">
                                     </div>
-                                </form>
-                            {{-- </div> --}}
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="card-body table-responsive p-0">
-                        <table class="table table-hover ">
+                        <table class="table table-hover">
                             @if ($listings->count() != 0)
                                 <thead>
                                     <tr>
@@ -80,35 +77,16 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="card-title text-uppercase text-success">{{ $listing->title }}</h5>
-                                                        {{-- <input type="number" name="listing_id" value="{{ $listing->id }}" h readonly> --}}
                                                     </div>
                                                     <div class="modal-body bg-light">
                                                         <div class="row">
                                                             <div class="col-sm-7 p-3">
                                                                 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                                                                    {{-- <div class="carousel-indicators">
-                                                                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active bg-primary" aria-current="true" aria-label="Slide 1"></button>
-                                                                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" class="bg-primary" aria-label="Slide 2"></button>
-                                                                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" class="bg-primary" aria-label="Slide 3"></button>
-                                                                    </div> --}}
                                                                     <div class="carousel-inner">
                                                                         <div class="carousel-item active">
                                                                             <img class="img-fluid d-block w-100" src="{{ asset('storage/properties/' .$listing->featured_image) }}">
-                                        
-                                                                            {{-- <div class="carousel-caption d-none d-md-block font-weight-bold text-danger">
-                                                                                <h5>First slide label</h5>
-                                                                                <p>Some representative placeholder content for the first slide.</p>
-                                                                            </div> --}}
                                                                         </div>
                                                                     </div>
-                                                                    {{-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                                        <span class="visually-hidden">Previous</span>
-                                                                    </button>
-                                                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                                        <span class="visually-hidden">Next</span>
-                                                                    </button> --}}
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-5 border-left">
@@ -157,7 +135,6 @@
                         </table> 
                         {{ $listings->links() }}
                     </div>
-                   
                 </div>
             </div>
         </div>
@@ -174,9 +151,4 @@
         });
     </script>
     @endif
-@endsection
-
-
-    
-
-    
+@endsection  

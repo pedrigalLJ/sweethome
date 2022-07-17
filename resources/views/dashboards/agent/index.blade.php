@@ -45,14 +45,9 @@
                         <div class="icon">
                             <i class="ion fas fa-coins"></i>
                         </div>
-                        <a href="{{ route('agent.properties.sold') }}" class="small-box-footer">
-                            More info <i class="fas fa-arrow-circle-right"></i>
-                        </a>
-                    
                     </div>
                 </div>
             </div>
-            
         </div>
         <div class="col-md-5">
             <div class="card">
@@ -104,10 +99,6 @@
                         <div class="icon">
                             <i class="ion fas fa-dollar-sign"></i>
                         </div>
-                        <a href="{{ route('agent.properties.sold') }}" class="small-box-footer">
-                            More info <i class="fas fa-arrow-circle-right"></i>
-                        </a>
-                    
                     </div>
                     <div class="small-box bg-dark shadow-lg">
                         <div class="inner">
@@ -117,9 +108,6 @@
                         <div class="icon">
                             <i class="ion far fa-money-bill-alt"></i>
                         </div>
-                        <a href="{{ route('agent.properties.sold') }}" class="small-box-footer">
-                            More info <i class="fas fa-arrow-circle-right"></i>
-                        </a>
                     </div>
                     <div class="small-box bg-secondary shadow-lg">
                         <div class="inner">
@@ -161,5 +149,4 @@
             })
         });
     </script> 
-    
 @endsection

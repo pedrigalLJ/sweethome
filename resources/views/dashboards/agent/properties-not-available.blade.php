@@ -43,7 +43,7 @@
         
                         <div class="card-tools">
                             {{-- <div class="input-group input-group-sm"> --}}
-                               <form action="{{ route('agent.properties-not-available') }}" method="GET">
+                               <form action="{{ route('agent.properties.index') }}" method="GET">
                                 @csrf
                                     <div class="input-group is-invalid">
                                         <div class="custom-file">

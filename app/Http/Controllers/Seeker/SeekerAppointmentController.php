@@ -53,7 +53,6 @@ class SeekerAppointmentController extends Controller
         $dateToDay = Carbon::parse($request->input('date'))->format('l');
         $date =$request->input('date');
         $avail_days = array($request->input('day'));
-        $avail_times = array($request->input('avail_times'));
         $input_time = $request->input('input_time');
         $agent_email = User::where('id', $request->input('agent_id'))->first();
        
@@ -62,12 +61,8 @@ class SeekerAppointmentController extends Controller
             $dcode = json_decode($val, true);
             $d_d = in_array($dateToDay, $dcode);
         }
-        foreach($avail_times as $time)
-        {
-            $dc = json_decode($time, true);
-            $t_d = in_array($input_time, $dc);
-        }
-        if(!Appointment::where([ 'user_id' => $user_id, 'property_id' => $property_id])->exists() && $d_d == TRUE &&  $t_d == TRUE)
+        
+        if(!Appointment::where([ 'user_id' => $user_id, 'property_id' => $property_id, 'time' => $input_time])->exists() && $d_d == TRUE)
         {
             Appointment::create([
                 'user_id' => $user_id,
@@ -105,10 +100,6 @@ class SeekerAppointmentController extends Controller
         {
             return redirect()->back()->withWarning('Day unavailable. Please make sure you follows the availability given.');
         }
-        elseif($t_d == FALSE)
-        {
-            return redirect()->back()->withWarning('Time unavailable. Please make sure you follows the availability given.');
-        }
         else
         {
             return redirect()->back()->withExist('You already set an appointment request.');
@@ -122,7 +113,7 @@ class SeekerAppointmentController extends Controller
         $appointment_id->save();
 
         return redirect()->route('seeker.appointments')
-            ->withDone('Marked as Done.');
+            ->withDone('Appointment Completed.');
     }
 
     public function cancel($id)

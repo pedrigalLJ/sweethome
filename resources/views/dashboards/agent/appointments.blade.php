@@ -63,11 +63,3 @@
     </script> 
     
 @endsection
-{{-- /* @foreach ($appointments as $appointment)
-                    {
-                        title : '{{ $appointment->given_name.' '. $appointment->last_name }}',
-                        start : '{{ $appointment->date }}',
-                        description : '{{ $appointment->status }}',
-                        url : '{{ route('agent.view-appointment', $appointment->id) }}'
-                    },
-                    @endforeach */ --}}
