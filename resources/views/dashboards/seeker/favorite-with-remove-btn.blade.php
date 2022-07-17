@@ -45,13 +45,11 @@
                                 </div>
                             </div>
                         </div>
-                            
                     </div>
                     <div class="col-md-5">
                         <h5 class="card-header text-uppercase text-success bg-white">{{ $favorite->property->title }}</h5>
                         <p class="text-muted mt-2"><i class="fas fa-map-marker-alt text-danger"></i>&nbsp;{{ $favorite->property->street_brgy.', '.$favorite->property->city.', '.$favorite->property->city }}
                         </p>
-                        
                         <p class="card-text"><h6 class="text-secondary">Descriptions</h6><hr class="mt-n1">{{ $favorite->property->description }}</p>
                         <hr>
                         <div class="text-muted">
@@ -235,7 +233,6 @@
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
@@ -263,8 +260,6 @@
             </div>
         </div>
     </div>
-  
-
 @endsection
 @section('javascripts')
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -292,5 +287,4 @@
 			});
 		</script>
 	@endif
-
 @endsection

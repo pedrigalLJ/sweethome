@@ -2,17 +2,8 @@
 @section('title', 'Seeker | Favorites')
 
 @section('content')
-    @if (session('status'))
-        <div 
-            class="alert alert-success" 
-            role="alert">
-            {{ session('status') }}
-        </div>
-    @endif
-    
     @include('dashboards.seeker.styles.style')
     @include('dashboards.seeker.layouts.searchbar')
-
     <div class="container mt-4">
         <div class="container pt-4" id="agents">
             <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -29,7 +20,6 @@
                                 <p class="card-text float-right">
                                     <small class="text-muted">{{ date('Fd\\,Y',strtotime($favorite->property->created_at)) }}</small>
                                 </p>
-                            
                         </div>
                         <div class="card-footer">
                             <div class="float-right">

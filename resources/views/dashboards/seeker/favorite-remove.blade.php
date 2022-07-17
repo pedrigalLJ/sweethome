@@ -4,7 +4,6 @@
 @section('content')
 @include('dashboards.seeker.styles.style')
     <div class="container">
-        
         <div class="card">
             <div class="card-body">
                 @if (session('message'))
@@ -23,7 +22,6 @@
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                
                             </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
@@ -183,11 +181,6 @@
                         <p class="mt-n2 text-muted"><i class="fas fa-map-marker-alt text-danger"></i>&nbsp;{{ $favorite->property->user->city.', '.$favorite->property->user->province }}
                         </p>
                         <p class="card-text"><h6 class="text-secondary">About</h6><hr class="mt-n1">{{ $favorite->property->user->about }}</p>
-                        
-                        
-                        {{-- <hr> --}}
-                        {{-- <p class="card-text"><h6 class="text-secondary">Total Listings</h6><hr class="mt-n1"><h4 class="text-danger font-weight-bold">{{ $favorite->property->count() }}</h4></p> --}}
-                        
                         <hr>
                         <div class="buttons">
                             <a href="{{ route('user.agent-profile', $favorite->property->user->id) }}" class="btn btn-danger"><i class="fas fa-user-tie"></i> Visit Profile</a>
@@ -197,6 +190,4 @@
             </div>
         </div>
     </div>
-  
-
 @endsection

@@ -6,8 +6,6 @@
     <div class="container">
         <div class="card shadow-lg">
             <div class="card-body">
-                {{-- @include('dashboards.agent.errors') --}}
-               
                 <h5 class="card-title text-capitalize text-danger">{{ $listings->category }} for {{ $listings->type }}</h5>
                 <div class="row mt-5">
                     <div class="col-md-7">
@@ -237,8 +235,6 @@
             </div>
         </div>
     </div>
-  
-
 @endsection
 @section('javascripts')
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -266,5 +262,4 @@
 			});
 		</script>
 	@endif
-
 @endsection

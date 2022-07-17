@@ -5,7 +5,6 @@
     <div class="container">
 		@include('dashboards.agent.errors')
 		@include('dashboards.seeker.styles.style')
-		{{-- @include('dashboards.session-success') --}}
         <div class="row">
             <div class="col-md-3">
 				<div class="card mb-2">
@@ -260,7 +259,6 @@
 			<div class="container">{{ $listings->appends(['ratings' => $count_ratings->currentPage()])->links() }}</div>
 		</div>
 	</div>
-	
 @endsection
 @section('javascripts')
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -272,5 +270,4 @@
 			});
 		</script>
 	@endif
-
 @endsection
