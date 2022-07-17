@@ -6,7 +6,7 @@
     <div class="container">
         <div class="card shadow-lg">
             <div class="card-body">
-                @include('dashboards.agent.errors')
+                {{-- @include('dashboards.agent.errors') --}}
                
                 <h5 class="card-title text-capitalize text-danger">{{ $listings->category }} for {{ $listings->type }}</h5>
                 <div class="row mt-5">
@@ -71,7 +71,12 @@
                             </span>
                         </div>
                         <hr>
-                        <h4 class="text-danger font-weight-bold">&#8369; {{ number_format($listings->price, 2 )}}</h4>
+                        <h4 class="text-danger font-weight-bold">
+                            &#8369; {{ number_format($listings->price, 2 )}}
+                            @if ($listings->type == 'rent')
+                                <small class="text-secondary h6">per month</small>
+                            @endif
+                        </h4>
                         <hr>
                         <div class="buttons">
                             <a href="{{ route('seeker.add-to-favorites', $listings->id) }}" class="btn btn-danger {{ $listings->addToFavorites ? 'disabled' : '' }}" >
@@ -163,28 +168,6 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    @foreach(json_decode($listings->avail_times) as $times)
-                                                        <span class="bg-danger h6">&nbsp;{{ $times }}&nbsp;</span>
-                                                    @endforeach
-                                                    <input 
-                                                        type="text" 
-                                                        class=" bg-success form-control @error('avail_times') is-invalid @enderror" 
-                                                        id="avail_times" 
-                                                        name="avail_times"
-                                                        readonly
-                                                        value="{{ $listings->avail_times }}"
-                                                        hidden>
-                                                        @error('avail_times')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>
-                                                                    {{ $message }}
-                                                                </strong>
-                                                            </span>
-                                                        @enderror
-                                                </div>
-                                            </div>
                                             <label for="date" class="col-form-label">Date</label>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
@@ -206,19 +189,12 @@
                                             <label for="input_time" class="col-form-label">Time</label>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
-                                                    <input 
-                                                        type="text" 
-                                                        class="form-control @error('input_time') is-invalid @enderror" 
-                                                        id="input_time" 
-                                                        name="input_time" 
-                                                        required>
-                                                    @error('input_time')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>
-                                                                {{ $message }}
-                                                            </strong>
-                                                        </span>
-                                                    @enderror
+                                                    <select name="input_time" id="input_time"  class="form-select" required>
+                                                        <option value="" selected disabled>Select Time</option>
+                                                        @foreach(json_decode($listings->avail_times) as $times)
+                                                        <option value="{{ $times }}">{{ $times }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
                                             <br>

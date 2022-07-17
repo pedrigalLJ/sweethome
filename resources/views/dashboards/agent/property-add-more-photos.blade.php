@@ -8,7 +8,11 @@
         {
             padding: 10px;
             height: 200px;
-            width: 250px;
+            width: 200px;
+        }
+        img[alt]
+        {
+            color: red;
         }
     </style>
     <div class="page-title mb-4 mt-n4" style="background-image: url('{{ asset('storage/images/condoImage.jpg')}}'); " data-overlay="5">
@@ -29,7 +33,7 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            @include('dashboards.errors')
+            {{-- @include('dashboards.errors') --}}
             <div class="col-md-12 mt-n4">
                 <div class="card card-primary">
                     <div class="card-header">
@@ -40,7 +44,7 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                                    <p class="modal-title text-primary" id="exampleModalLongTitle">Add More Photos</p>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -50,17 +54,17 @@
                                     <div class="modal-body">
                                         <div >
                                             <input name="property_id" value="{{ $listing->id }}" hidden>
-                                            <label>Choose Files</label>
-                                            <input type="file" id="images"  name="photos[]" multiple>
+                                            <input type="file" accept="image/*" id="images" onchange="validateFileType()"  name="photos[]" multiple required>
+                                           
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="mt-1 text-center">
+                                            <div class="mt-1">
                                                 <div class="images-preview-div"> </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="reset" class="btn btn-secondary" value="reset">Reset</button>
                                         <button type="submit" class="btn btn-primary">Add</button>
                                     </div>
                                 </form>
@@ -71,7 +75,7 @@
                         <div class="container-fluid">
                             @forelse($images as $image)
                                 @foreach (json_decode($image->url) as $picture)
-                                    <img class="img-fluid shadow-lg mr-3 hover-photo"  src="{{ asset('storage/properties/'.$picture) }}" style="height:200px; width:200px"/>
+                                    <img class="img-fluid shadow-lg mr-3 hover-photo" src="{{ asset('storage/properties/'.$picture) }}" style="height:200px; width:200px"/>
                                 @endforeach
                                         
                             @empty
@@ -89,7 +93,8 @@
 @section('javascripts')
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script >
+    <script>
+        
         $(function() {
         // Multiple images preview with JavaScript
             var previewImages = function(input, imgPreviewPlaceholder) 
@@ -101,7 +106,7 @@
                     {
                         var reader = new FileReader();
                         reader.onload = function(event) {
-                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(imgPreviewPlaceholder);
+                            $($.parseHTML('<img>')).attr('alt', 'Unsupported format. JPG, JPEG, PNG are allowed.').attr('src', event.target.result).appendTo(imgPreviewPlaceholder);
                         }
                         reader.readAsDataURL(input.files[i]);
                     }
@@ -111,8 +116,6 @@
                 previewImages(this, 'div.images-preview-div');
             });
         });
-
-	
     </script>
     @if (session('message'))
         <script>
@@ -121,5 +124,15 @@
                 icon: "success",
             });
         </script>
+    @endif
+    @if ($errors->any())
+    @foreach ($errors->all() as $error)
+        <script>
+            swal({
+                text: "{{ $error }}",
+                icon: "error",
+            });
+        </script>
+        @endforeach
     @endif
 @endsection

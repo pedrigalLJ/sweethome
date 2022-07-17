@@ -74,7 +74,7 @@ class PropertyController extends Controller
             'city'              => 'required|string|regex:/^[a-zA-Z\s]+$/u|max:100',
             'province'          => 'required|string|regex:/^[a-zA-Z\s]+$/u|max:100',
             'featured_image'    => 'required|mimes:jpg,png,jpeg|max:5048',
-            'price'             => 'required|regex:/^\d+(\.\d{1,2})?$/|min:0',
+            'price'             => 'required|regex:/^[1-9]\d*(\.\d+)?$/|min:1',
             'description'       => 'required',
             'avail_days'        => 'required',
             'avail_times'       => 'required',
@@ -158,11 +158,13 @@ class PropertyController extends Controller
             'city'              => 'required|string|regex:/^[a-zA-Z\s]+$/u|max:100',
             'province'          => 'required|string|regex:/^[a-zA-Z\s]+$/u|max:100',
             'featured_image'    => 'mimes:jpg,png,jpeg|max:5048',
-            'price'             => 'required|regex:/^\d+(\.\d{1,2})?$/|min:0',
+            'price'             => 'required|regex:/^[1-9]\d*(\.\d+)?$/|min:1',
             'status'            => 'required',
             'description'       => 'required',
             'url'               => 'mimes:jpg,png,jpeg|max:5048',
             
+        ],[
+            'price.min' => 'Price not accepting negative numbers.'
         ]);
        
         if($input = $request->input('avail_days') == '')

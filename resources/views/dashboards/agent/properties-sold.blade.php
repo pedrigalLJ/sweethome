@@ -19,7 +19,7 @@
                             <li class="breadcrumb-item">{{ _('Properties') }}</li>
                         </ol>
                         <h2 class="breadcrumb-title text-capitalize">
-                            {{ _('Not Available') }}
+                            {{ _('Sold(s)') }} 
                         </h2>
                     </div>
                     
@@ -38,12 +38,12 @@
                 <div class="card card-primary  mt-n4">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <a href="{{ route('agent.properties.create') }}" class="text-sm"> <i class="fa fa-plus-circle"></i> Add New Listing</a>
+                            <small>Total Sales: </small> <strong>&#8369; {{ number_format($sales, 2) }}</strong>
                         </h3>
         
                         <div class="card-tools">
                             {{-- <div class="input-group input-group-sm"> --}}
-                               <form action="{{ route('agent.properties-not-available') }}" method="GET">
+                               <form action="{{ route('agent.properties.sold') }}" method="GET">
                                 @csrf
                                     <div class="input-group is-invalid">
                                         <div class="custom-file">
@@ -82,8 +82,8 @@
                                                 <strong class="text-danger">&#8369; {{ number_format($listing->price, 2) }}</strong>
                                             </td>
                                             <td>{{ Str::limit($listing->description, 50, '...')  }}</td>
-                                           @if ($listing->status === 0)
-                                               <td class="text-danger">Not Available</td>
+                                           @if ($listing->status === 2)
+                                               <td class="text-danger">Sold</td>
                                            @endif
                                            <td class="text-lg"><a href="#" data-toggle="modal" data-target="#viewProperty{{ $listing->id }}" class="mr-2"><i class="fas fa-eye"></i></a><a href="{{ route('agent.properties.edit', $listing->id) }}" class="text-warning"><i class="fas fa-edit"></i></a></td>
                                         </tr>

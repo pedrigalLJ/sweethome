@@ -35,6 +35,24 @@
                         </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="small-box bg-info shadow-lg">
+                        <div class="inner">
+                            <h3>&#8369; {{ number_format($sales, 2) }}</h3>
+                            <p>Total Sales</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion fas fa-coins"></i>
+                        </div>
+                        <a href="{{ route('agent.properties.sold') }}" class="small-box-footer">
+                            More info <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    
+                    </div>
+                </div>
+            </div>
+            
         </div>
         <div class="col-md-5">
             <div class="card">
@@ -80,16 +98,40 @@
                     </div>
                     <div class="small-box bg-danger shadow-lg">
                         <div class="inner">
+                            <h3>{{ $sold->count() }}</h3>
+                            <p>Sold Properties</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion fas fa-dollar-sign"></i>
+                        </div>
+                        <a href="{{ route('agent.properties.sold') }}" class="small-box-footer">
+                            More info <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    
+                    </div>
+                    <div class="small-box bg-dark shadow-lg">
+                        <div class="inner">
+                            <h3>{{ $rented->count() }}</h3>
+                            <p>Rented Properties</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion far fa-money-bill-alt"></i>
+                        </div>
+                        <a href="{{ route('agent.properties.sold') }}" class="small-box-footer">
+                            More info <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                    <div class="small-box bg-secondary shadow-lg">
+                        <div class="inner">
                             <h3>{{ $notAvailable->count() }}</h3>
                             <p>Not Available Properties</p>
                         </div>
                         <div class="icon">
-                            <i class="ion fas fa-bars"></i>
+                            <i class="ion fas fa-times"></i>
                         </div>
                         <a href="{{ route('agent.properties-not-available') }}" class="small-box-footer">
                             More info <i class="fas fa-arrow-circle-right"></i>
                         </a>
-                    
                     </div>
                 </div>
             </div>

@@ -170,10 +170,10 @@
   }
   .more
   {
-	background:lightblue;
-	color:navy;
-	font-size:13px;
-	padding:3px;
-	cursor:pointer;
+    background:lightblue;
+    color:navy;
+    font-size:13px;
+    padding:3px;
+    cursor:pointer;
   }
 </style>

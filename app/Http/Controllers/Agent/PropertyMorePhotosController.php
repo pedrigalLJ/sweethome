@@ -52,13 +52,4 @@ class PropertyMorePhotosController extends Controller
 
         return redirect()->back()->withMessage('Photos uploaded successfully.');
     }
-
-    // public function remove($id)
-    // {
-    //     dd($id);
-        
-    //     PropertyMorePhotos::where('property_id', $id)->delete();
-
-    //     return redirect()->back()->withMessage('Remove successfully.');
-    // }
 }

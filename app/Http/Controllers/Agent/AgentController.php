@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
-use App\Models\AgentVerification;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Models\Property;
@@ -12,7 +11,6 @@ use App\Rules\MatchOldPassword;
 use App\Models\User;
 use App\Models\ChMessage as Message;
 use App\Models\Rating;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AgentController extends Controller
@@ -20,7 +18,8 @@ class AgentController extends Controller
     public function index()
     {
         $listings = Property::all()
-            ->where('agent_id', Auth::id()); 
+            ->where('agent_id', Auth::id())
+            ->where('status', 1); 
         $msg = Message::all()
             ->where('seen', 0)
             ->where('from_id', '!=', Auth::id())
@@ -29,14 +28,17 @@ class AgentController extends Controller
             ->where('status', '=', 'Approved')
             ->where('agent_id', Auth::user()->id);
         $notAvailable = Property::all()
-            ->where('status', 'Not Available')
+            ->where('status', 0)
             ->where('agent_id', Auth::id());
-        $rented = Property::all()->where('status', 'Not Available')
+        $rented = Property::all()->where('status', 3)
             ->where('type', 'rent')
             ->where('agent_id', Auth::id());
-        $sold = Property::all()->where('status', 'Not Available')
+        $sold = Property::all()->where('status', 2)
             ->where('type', 'sale')
             ->where('agent_id', Auth::id());
+        $sales = Property::where('agent_id', Auth::id())
+            ->where('status', 2)
+            ->sum('price');
         $settingAppointment = Appointment::all()
             ->where('status', 1)
             ->where('agent_id', Auth::id());
@@ -44,7 +46,7 @@ class AgentController extends Controller
             ->where('status', 'Waiting')
             ->where('agent_id', Auth::id());
 
-        return view('dashboards.agent.index', compact('sold', 'rented','listings', 'needApproval', 'msg', 'appointments', 'settingAppointment', 'notAvailable'));
+        return view('dashboards.agent.index', compact('sales', 'sold', 'rented','listings', 'needApproval', 'msg', 'appointments', 'settingAppointment', 'notAvailable'));
     }
 
     public function notAvailable(Request $request)
@@ -63,7 +65,7 @@ class AgentController extends Controller
             ->where('to_id', Auth::id());
         return view('dashboards.agent.properties-not-available', compact('listings', 'msg'));
     }
-
+    
     public function profile()
     {
         $msg = Message::all()
@@ -149,7 +151,4 @@ class AgentController extends Controller
         }
         return view('dashboards.agent.rate-and-comments', compact('msg', 'ratings', 'average_of_ratings'));
     }
-
-    
-  
 }

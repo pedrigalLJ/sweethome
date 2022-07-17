@@ -22,7 +22,7 @@
     </div>
     <div class="container">
         <div class="col-md-12">
-            @include('dashboards.agent.errors')
+            {{-- @include('dashboards.agent.errors') --}}
             <div class="card card-primary mt-n4">
                 <div class="card-header card-title h5"><strong>Edit Listing</strong></div>
                 <div class="card-body box-profile">
@@ -218,7 +218,7 @@
                                 </label>
                                 <input 
                                     id="price" 
-                                    type="number" 
+                                    type="text" 
                                     class="form-control @error('price') is-invalid @enderror" 
                                     name="price" 
                                     value="{{ $listings->price }}" 
@@ -348,8 +348,12 @@
                                     <option value="" disabled selected>Select...</option>
                                     <option value="1" {{ $listings->status == '1' ? 'selected' : '' }}>Available</option>
                                     <option value="0" {{ $listings->status == '0' ? 'selected' : '' }}>Not Available</option>
-                                    <option value="2" {{ $listings->status == '2' ? 'selected' : '' }}>Sold</option>
-                                    <option value="3" {{ $listings->status == '3' ? 'selected' : '' }}>Rented</option>
+                                    @if ($listings->type == 'sale')
+                                        <option value="2" {{ $listings->status == '2' ? 'selected' : '' }}>Sold</option>
+                                    @endif
+                                    @if ($listings->status == 'rent') 
+                                        <option value="3" {{ $listings->status == '3' ? 'selected' : '' }}>Rented</option>
+                                    @endif
                                 </select>
                                 @error('status')
                                     <span 
@@ -473,6 +477,10 @@
         swal({
             text: "{{ session('message') }}",
             icon: "success",
+        });
+        swal({
+            text: "{{ session('message') }}",
+            icon: "error",
         });
     </script>
     @endif

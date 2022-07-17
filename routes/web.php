@@ -29,10 +29,10 @@ Route::redirect('/', 'login');
 
 Auth::routes(['verify' => true]);
 
-Route::middleware(['auth', 'verified'])->group(function () 
+Route::middleware(['auth', 'verified', 'check-approved'])->group(function () 
 {
     
-    Route::middleware(['is-seeker', 'check-approved', 'prevent-back-history'])->prefix('seeker')->name('seeker.')->group(function()
+    Route::middleware(['is-seeker', 'prevent-back-history'])->prefix('seeker')->name('seeker.')->group(function()
     {
         Route::get('dashboard', [SeekerController::class, 'index'])->name('dashboard');
         Route::get('view-property/{id}', [SeekerController::class, 'viewProperty'])->name('view-property');
@@ -68,6 +68,7 @@ Route::middleware(['auth', 'verified'])->group(function ()
         Route::get('rate-and-comments', [AgentController::class, 'rateAndComments'])->name('rate-and-comments');
         Route::get('change-password', [AgentController::class, 'changePassword'])->name('change-password');
         Route::get('properties-not-available', [AgentController::class, 'notAvailable'])->name('properties-not-available');
+        Route::get('properties/sold', [AgentController::class, 'sold'])->name('properties.sold');
         Route::resource('properties', PropertyController::class);
         
         Route::get('property-add-more-photos/{id}', [PropertyMorePhotosController::class, 'addMorePhotos'])->name('property-add-more-photos');

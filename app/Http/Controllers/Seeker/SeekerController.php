@@ -9,12 +9,11 @@ use App\Models\Property;
 use App\Models\FavoriteProperty;
 use Illuminate\Support\Facades\Auth;
 use App\Rules\MatchOldPassword;
-use App\Models\Appointment;
 use App\Models\ChMessage as Message;
 use App\Models\PropertyMorePhotos;
 use App\Models\Rating;
-use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class SeekerController extends Controller
 {
@@ -28,17 +27,14 @@ class SeekerController extends Controller
             ->where('status', 1)
             ->take(3)
             ->get();
-        $listings = Property::all();
         $listings = Property::latest()
-            
             ->where('status', 1)
-            ->paginate(3);
+            ->take(3)
+            ->get();
         $msg = Message::all()
             ->where('seen', 0)
             ->where('from_id', '!=', Auth::id())
             ->where('to_id', Auth::id());
-
-        
 
         return view('dashboards.seeker.index', compact('listings', 'agents', 'msg'));
     }
@@ -65,7 +61,8 @@ class SeekerController extends Controller
         $type = $request->type;
         $minprice = $request->minprice;
         $maxprice = $request->maxprice; 
-        $listings = Property::where('status', 1)
+        $listings = Property::latest()
+            ->where('status', 1)
             ->when($address, function ($query, $address) {
                 return $query->where('street_brgy', 'LIKE', '%' .$address. '%')->orWhere('city', 'LIKE', '%' .$address. '%')->orWhere('province', 'LIKE', '%' .$address. '%');
             })->when($category, function ($query, $category) {
@@ -92,43 +89,39 @@ class SeekerController extends Controller
     public function allAgents(Request $request)
     {
         $search = $request->agent;
-        $agents = User::where('role_id', 1)
+        $ratings = Rating::with('agent')
+            ->leftJoin('users', 'users.id', '=', 'agent_id')
+            ->select(array('ratings.*',
+                DB::raw('AVG(star_rate) as ratings_average')
+                ))
+            ->groupBy('agent_id')
+            ->orderBy('ratings_average', 'DESC')
             ->when($search, function ($query, $search) {
                 return $query->where('given_name', 'LIKE', '%' .$search. '%')->orWhere('last_name', 'LIKE', '%' .$search. '%')->orWhere('username', 'LIKE', '%' .$search. '%');
             })
+            ->where('users.status', 1)
+            ->where('users.role_id', 1)
+            ->paginate(6);
+      
+        $ratingsAgentId = Rating::pluck('agent_id')->all();
+        $agents = User::latest()->with('ratings')
+            ->where('role_id', 1)
+            ->when($search, function ($query, $search) {
+                $ratingsAgentId = Rating::pluck('agent_id')->all();
+                return $query->whereNotIn('id', $ratingsAgentId)->where('given_name', 'LIKE', '%' .$search. '%')->orWhere('last_name', 'LIKE', '%' .$search. '%')->orWhere('username', 'LIKE', '%' .$search. '%');
+            })
+            ->whereNotIn('id', $ratingsAgentId)
             ->where('status', 1)
             ->get();
-        
+       
+
         $msg = Message::all()
             ->where('seen', 0)
             ->where('from_id', '!=', Auth::id())
             ->where('to_id', Auth::id());
 
-        
-        $agentRatings = [
-            'chart_title' => 'Total Sales(₱)',
-            'chart_type' => 'bar',
-            'report_type' => 'group_by_relationship',
-            'model' => 'App\Models\Property',
-        
-            'relationship_name' => 'user', 
-            'group_by_field' => 'username',
-            'group_by_period' => 'month',
-            'where_raw' => 'status = 2 AND type = "sale"',
-        
-            'aggregate_function' => 'sum',
-            'aggregate_field' => 'price',
-
-            'chart_color' => '249, 166, 2',
-            'top_results' => 10,
-
-            
-            
-        ];
-
-        $agentRatingsChart = new LaravelChart($agentRatings);
     
-        return view('dashboards.seeker.all-agents', compact('search', 'agents', 'msg', 'agentRatingsChart'));
+        return view('dashboards.seeker.all-agents', compact('search', 'msg', 'agents', 'ratings'));
     }
 
     public function aboutUs()
@@ -250,5 +243,4 @@ class SeekerController extends Controller
         return view('dashboards.seeker.visit-agent-profile', 
             compact('agents', 'listings', 'msg', 'ratings', 'average_of_ratings', 'count_ratings'));
     }
-    
 }
