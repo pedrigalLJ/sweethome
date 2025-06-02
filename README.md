@@ -38,6 +38,7 @@ SweetHome is a PHP based on Laravel that helps real estate agent's properties mo
        2. Edit php.ini
        3. Search for ;extension=fileinfo, and uncomment it by removing the semicolon(;)
        4. Save the file. To verify run: php -m | findstr fileinfo. If it prints fileinfo, it's enabled.
+       5. Then run: composer update --dry-run
  5. `copy .env.example .env`
  6. `php artisan key:generate`
  7. `php artisan migrate`
