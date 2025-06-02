@@ -2,6 +2,10 @@
 
 SweetHome is a PHP based on Laravel that helps real estate agent's properties more visible to seekers, which they can find a legitimate agent they can trust as well.
 
+##Pre-requites Installation
+- Install PHP, refer to this link: https://www.geeksforgeeks.org/php/how-to-install-php-in-windows-10/
+- Install composer, refer to this link: https://www.geeksforgeeks.org/installation-guide/how-to-install-php-composer-on-windows/
+
 ## Frameworks
  - Laravel 8
  - Bootstrap
