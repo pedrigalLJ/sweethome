@@ -32,12 +32,18 @@ SweetHome is a PHP based on Laravel that helps real estate agent's properties mo
  1. `git clone https://github.com/pedrigalLJ/sweethome.git`
  2. `cd sweethome`
  3. `composer install`
- 4. `copy .env.example .env`
- 5. `php artisan key:generate`
- 6. `php artisan migrate`
- 7. `php artisan db:seed`
- 8. `php artisan storage:link`
- 9. `php artisan serve`
+     - When encountered an error message: "Your lock file does not contain a compatible set of packages. Please run composer update." (means your PHP installation is missing the fileinfo extension, which is required by Laravel and other packages  like league/flysystem.)
+     - To fix:
+       1. Open your PHP folder
+       2. Edit php.ini
+       3. Search for ;extension=fileinfo, and uncomment it by removing the semicolon(;)
+       4. Save the file. To verify run: php -m | findstr fileinfo. If it prints fileinfo, it's enabled.
+ 5. `copy .env.example .env`
+ 6. `php artisan key:generate`
+ 7. `php artisan migrate`
+ 8. `php artisan db:seed`
+ 9. `php artisan storage:link`
+ 10. `php artisan serve`
 ## Configurations
  - email in the .env
  > MAIL_DRIVER=smtp
