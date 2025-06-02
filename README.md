@@ -41,7 +41,7 @@ SweetHome is a PHP based on Laravel that helps real estate agent's properties mo
           ;extension=openssl
           ;extension=mbstring
           ;extension=pdo_mysql, and uncomment it by removing the semicolon(;)
-       5. Save the file. Then run comoposer install again.
+       5. Save the file. Then run composer install again.
  5. `copy .env.example .env`
  6. `php artisan key:generate`
  7. `php artisan migrate`
